@@ -1,12 +1,17 @@
 <template>
   <div id="app">
-    <h1>Filmaria</h1>
+    <Header/>
+    <router-view/>
   </div>
 </template>
 
 <script>
+import Header from './components/Header';
 export default {
-  name: 'App_'
+  name: 'App_',
+  components: {
+    Header
+  }
 }
 </script>
 
