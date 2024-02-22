@@ -1,6 +1,9 @@
 <template>
   <div id="home">
-    <div class="lista-filmes">
+    <div class="lista-filmes" v-if="loading">
+      <Loading/>
+    </div>
+    <div class="lista-filmes" v-else>
       <article class="filme" v-for="filme in filmes" :key="filme.id">
         <strong>{{filme.nome}}</strong>
         <img :src="filme.foto" :alt="filme.nome">
@@ -12,17 +15,23 @@
 
 <script>
 import api from '../service/api';
+import Loading from '../components/Loading.vue';
 
 export default {
   name: 'Home_',
+  components: {
+    Loading
+  },
   data(){
     return{
-      filmes: []
+      filmes: [],
+      loading: true
     }
   },
   async created(){
     const response = await api.get('?api=filmes');
     this.filmes = response.data;
+    this.loading = false;
   }
 }
 </script>
